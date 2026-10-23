@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StormScope Batangas - Typhoon Awareness & Preparedness for Batangas, Philippines</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="Images/StormScope.png" alt="StormScope Batangas Logo" class="logo-image">
+                <span class="logo-text">StormScope Batangas</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About Typhoons</a></li>
+                <li><a href="#updates" class="nav-link">Updates</a></li>
+                <li><a href="#past-typhoons" class="nav-link">Past Typhoons</a></li>
+                <li><a href="#preparedness" class="nav-link">Preparedness</a></li>
+                <li><a href="#simulator" class="nav-link">Simulator</a></li>
+                <li><a href="#resources" class="nav-link">Resources</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <canvas id="stormCanvas"></canvas>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Stay Safe, Stay Informed</h1>
+            <p class="hero-subtitle">Typhoon Awareness & Preparedness Platform for Batangas, Philippines</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('preparedness')">Get Prepared</button>
+                <button class="btn btn-secondary" onclick="scrollToSection('updates')">Check Updates</button>
+            </div>
+            <div class="typhoon-alert" id="typhoonAlert">
+                <span class="alert-icon">⚠️</span>
+                <span class="alert-text">Check PAGASA and Batangas DRRM for current typhoon warnings</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Typhoons Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">Understanding Typhoons</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="card-icon">🌊</div>
+                    <h3>What is a Typhoon?</h3>
+                    <p>A typhoon is a mature tropical cyclone that develops in the northwestern part of the Pacific Ocean. It's characterized by strong winds, heavy rainfall, and storm surges.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">📊</div>
+                    <h3>Typhoon Categories</h3>
+                    <p>Typhoons are classified by wind speed:</p>
+                    <ul class="typhoon-categories-list">
+                        <li>Tropical Depression (&lt;39 mph)</li>
+                        <li>Tropical Storm (39-73 mph)</li>
+                        <li>Typhoon (74+ mph)</li>
+                        <li>Super Typhoon (150+ mph)</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">⚡</div>
+                    <h3>Formation Process</h3>
+                    <p>Typhoons form over warm ocean waters (26.5°C+) when atmospheric conditions create low pressure systems that intensify into rotating storms.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">🌍</div>
+                    <h3>Batangas & Typhoons</h3>
+                    <p>Batangas, located in the CALABARZON region, is frequently affected by typhoons from the Pacific. The province's coastal areas are particularly vulnerable to storm surges and flooding.</p>
+                </div>
+            </div>
+
+            <!-- Interactive Typhoon Formation Timeline -->
+            <div class="timeline-container">
+                <h3 class="subsection-title">Typhoon Formation Timeline</h3>
+                <div class="timeline">
+                    <div class="timeline-item" data-step="1">
+                        <div class="timeline-marker">
+                            <span class="timeline-number">1</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Warm Ocean Waters</h4>
+                            <p>Sea surface temperature above 26.5°C provides energy</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-step="2">
+                        <div class="timeline-marker">
+                            <span class="timeline-number">2</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Atmospheric Instability</h4>
+                            <p>Rising warm air creates low pressure system</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-step="3">
+                        <div class="timeline-marker">
+                            <span class="timeline-number">3</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Rotation Begins</h4>
+                            <p>Coriolis effect causes counter-clockwise rotation</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-step="4">
+                        <div class="timeline-marker">
+                            <span class="timeline-number">4</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Eye Formation</h4>
+                            <p>Central eye develops with calm conditions</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-step="5">
+                        <div class="timeline-marker">
+                            <span class="timeline-number">5</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Mature Typhoon</h4>
+                            <p>Full development with maximum wind speeds</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updates & Announcements Section -->
+    <section id="updates" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Weather Updates & Government Announcements</h2>
+            <p class="section-description">Stay informed with the latest weather conditions and official announcements for Batangas</p>
+            
+            <div class="updates-container">
+                <!-- Monthly Weather Update -->
+                <div class="update-section">
+                    <h3 class="subsection-title">📅 Monthly Weather Update</h3>
+                    <div class="weather-update-card">
+                        <div class="update-header">
+                            <span class="update-date" id="currentMonth"></span>
+                            <span class="update-status-text" id="weatherStatus">Current Conditions</span>
+                        </div>
+                        <div class="weather-info-grid">
+                            <div class="weather-info-item">
+                                <span class="weather-label">Typhoon Season Status:</span>
+                                <span class="weather-value" id="seasonStatus">Active</span>
+                            </div>
+                            <div class="weather-info-item">
+                                <span class="weather-label">Expected Activity:</span>
+                                <span class="weather-value" id="expectedActivity">Moderate</span>
+                            </div>
+                            <div class="weather-info-item">
+                                <span class="weather-label">PAGASA Advisory:</span>
+                                <span class="weather-value" id="pagasaAdvisory">Monitor weather updates</span>
+                            </div>
+                        </div>
+                        <div class="update-note">
+                            <strong>Note:</strong> This is a general monthly update. Always check <a href="https://www.pagasa.dost.gov.ph" target="_blank">PAGASA</a> for real-time weather information and official advisories.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Government Announcements -->
+                <div class="update-section">
+                    <h3 class="subsection-title">📢 Government Announcements</h3>
+                    <div class="announcements-container" id="announcementsContainer">
+                        <div class="announcement-card">
+                            <div class="announcement-header">
+                                <span class="announcement-date">Latest</span>
+                                <span class="announcement-source">Batangas DRRM</span>
+                            </div>
+                            <h4>Evacuation Center Locations</h4>
+                            <p>All municipalities have designated evacuation centers. Contact your barangay captain for the nearest location. Ensure you know your evacuation route before a typhoon arrives.</p>
+                        </div>
+                        <div class="announcement-card">
+                            <div class="announcement-header">
+                                <span class="announcement-date">Ongoing</span>
+                                <span class="announcement-source">Provincial Government</span>
+                            </div>
+                            <h4>Typhoon Preparedness Campaign</h4>
+                            <p>The Provincial Government of Batangas continues its typhoon preparedness campaign. All residents are encouraged to prepare emergency kits and review evacuation plans.</p>
+                        </div>
+                        <div class="announcement-card">
+                            <div class="announcement-header">
+                                <span class="announcement-date">Important</span>
+                                <span class="announcement-source">PAGASA</span>
+                            </div>
+                            <h4>Weather Monitoring</h4>
+                            <p>Stay updated through official channels: PAGASA website, local radio stations, and barangay announcements. Do not rely solely on social media for critical weather information.</p>
+                        </div>
+                    </div>
+                    <div class="announcement-note">
+                        <strong>Important:</strong> Always verify information through official government channels. Follow instructions from local authorities and the Batangas Disaster Risk Reduction and Management Office (DRRM).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historical Typhoon Data for Batangas -->
+            <div class="historical-data">
+                <h3 class="subsection-title">📊 Historical Typhoon Data for Batangas</h3>
+                <div class="historical-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">3-5</div>
+                        <div class="stat-label">Typhoons per Year</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Jun-Nov</div>
+                        <div class="stat-label">Peak Season</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Jul-Oct</div>
+                        <div class="stat-label">Most Active</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Typhoons Section -->
+    <section id="past-typhoons" class="section">
+        <div class="container">
+            <h2 class="section-title">Past Typhoons That Hit Batangas</h2>
+            <p class="section-description">Learn from history: Major typhoons that have affected Batangas and their impacts</p>
+            
+            <div class="typhoons-timeline">
+                <div class="typhoon-card featured" data-year="2020">
+                    <div class="typhoon-header">
+                        <div class="typhoon-name">
+                            <span class="typhoon-icon">🌪️</span>
+                            <div>
+                                <h3>Typhoon Rolly (Goni)</h3>
+                                <span class="typhoon-date">October 29 - November 2, 2020</span>
+                            </div>
+                        </div>
+                        <div class="typhoon-category category-5">Category 5</div>
+                    </div>
+                    <div class="typhoon-details">
+                        <div class="typhoon-stats">
+                            <div class="stat-item">
+                                <span class="stat-icon">💨</span>
+                                <div>
+                                    <div class="stat-value">195 mph</div>
+                                    <div class="stat-desc">Peak Wind Speed</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">🌧️</span>
+                                <div>
+                                    <div class="stat-value">Heavy</div>
+                                    <div class="stat-desc">Rainfall</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">🌊</span>
+                                <div>
+                                    <div class="stat-value">High</div>
+                                    <div class="stat-desc">Storm Surge</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Image Slideshow -->
+                        <div class="typhoon-slideshow" data-typhoon="rolly">
+                            <div class="slideshow-container">
+                                <div class="slide active">
+                                    <img src="Images/Typhoons/Rolly/Rolly1.jpg" alt="Typhoon Rolly satellite view showing Category 5 intensity">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <div class="slide">
+                                    <img src="Images/Typhoons/Rolly/Rolly2.jpg" alt="Strong winds and storm conditions">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <div class="slide">
+                                    <img src="Images/Typhoons/Rolly/Rolly3.jpg" alt="Flooding and damage in Batangas">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <div class="slide">
+                                    <img src="Images/Typhoons/Rolly/Rolly4.jpeg" alt="People affected by typhoon">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <div class="slide">
+                                    <img src="Images/Typhoons/Rolly/Rolly5.png" alt="Damage to infrastructure">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <button class="slideshow-prev" onclick="changeSlide('rolly', -1)">❮</button>
+                                <button class="slideshow-next" onclick="changeSlide('rolly', 1)">❯</button>
+                            </div>
+                            <div class="slideshow-dots">
+                                <span class="dot active" onclick="currentSlide('rolly', 0)"></span>
+                                <span class="dot" onclick="currentSlide('rolly', 1)"></span>
+                                <span class="dot" onclick="currentSlide('rolly', 2)"></span>
+                                <span class="dot" onclick="currentSlide('rolly', 3)"></span>
+                                <span class="dot" onclick="currentSlide('rolly', 4)"></span>
+                            </div>
+                        </div>
+                        <div class="typhoon-impact">
+                            <h4>Impact on Batangas:</h4>
+                            <ul>
+                                <li>Severe damage to coastal areas, especially in Batangas City and Calatagan</li>
+                                <li>Widespread power outages across the province</li>
+                                <li>Significant damage to agriculture and fishing industries</li>
+                                <li>Multiple evacuation centers activated</li>
+                                <li>Infrastructure damage to roads and bridges</li>
+                            </ul>
+                        </div>
+                        <div class="typhoon-lesson">
+                            <strong>💡 Essential Learnings in Disaster Awareness:</strong> This super typhoon highlighted the importance of early evacuation for coastal communities and reinforced the need for stronger infrastructure in vulnerable areas.
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="typhoon-card" data-year="2020">
+                    <div class="typhoon-header">
+                        <div class="typhoon-name">
+                            <span class="typhoon-icon">🌧️</span>
+                            <div>
+                                <h3>Typhoon Quinta (Molave)</h3>
+                                <span class="typhoon-date">October 23-26, 2020</span>
+                            </div>
+                        </div>
+                        <div class="typhoon-category category-3">Category 3</div>
+                    </div>
+                    <div class="typhoon-details">
+                        <div class="typhoon-stats">
+                            <div class="stat-item">
+                                <span class="stat-icon">💨</span>
+                                <div>
+                                    <div class="stat-value">125 mph</div>
+                                    <div class="stat-desc">Peak Wind Speed</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">🌧️</span>
+                                <div>
+                                    <div class="stat-value">Heavy</div>
+                                    <div class="stat-desc">Rainfall</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">🌊</span>
+                                <div>
+                                    <div class="stat-value">Low</div>
+                                    <div class="stat-desc">Storm Surge</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Image Slideshow -->
+                        <div class="typhoon-slideshow" data-typhoon="quinta">
+                            <div class="slideshow-container">
+                                <div class="slide active">
+                                    <img src="Images/Typhoons/Quinta/Quinta1.webp" alt="Typhoon Quinta">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <div class="slide">
+                                    <img src="Images/Typhoons/Quinta/Quinta2.jpg" alt="Heavy rain">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <div class="slide">
+                                    <img src="Images/Typhoons/Quinta/Quinta3.jpg" alt="Agricultural damage">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <button class="slideshow-prev" onclick="changeSlide('quinta', -1)">❮</button>
+                                <button class="slideshow-next" onclick="changeSlide('quinta', 1)">❯</button>
+                            </div>
+                            <div class="slideshow-dots">
+                                <span class="dot active" onclick="currentSlide('quinta', 0)"></span>
+                                <span class="dot" onclick="currentSlide('quinta', 1)"></span>
+                                <span class="dot" onclick="currentSlide('quinta', 2)"></span>
+                            </div>
+                        </div>
+                        <div class="typhoon-impact">
+                            <h4>Impact on Batangas:</h4>
+                            <ul>
+                                <li>Heavy rainfall causing localized flooding</li>
+                                <li>Damage to agricultural areas</li>
+                                <li>Power interruptions in several municipalities</li>
+                                <li>Minor infrastructure damage</li>
+                            </ul>
+                        </div>
+                        <div class="typhoon-lesson">
+                            <strong>💡 Essential Learnings in Disaster Awareness:</strong> Even Category 3 typhoons can cause significant damage, highlighting the importance of preparedness regardless of storm intensity.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="typhoon-card" data-year="2014">
+                    <div class="typhoon-header">
+                        <div class="typhoon-name">
+                            <span class="typhoon-icon">🌀</span>
+                            <div>
+                                <h3>Typhoon Glenda (Rammasun)</h3>
+                                <span class="typhoon-date">July 13-16, 2014</span>
+                            </div>
+                        </div>
+                        <div class="typhoon-category category-4">Category 4</div>
+                    </div>
+                    <div class="typhoon-details">
+                        <div class="typhoon-stats">
+                            <div class="stat-item">
+                                <span class="stat-icon">💨</span>
+                                <div>
+                                    <div class="stat-value">150 mph</div>
+                                    <div class="stat-desc">Peak Wind Speed</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">🌧️</span>
+                                <div>
+                                    <div class="stat-value">Heavy</div>
+                                    <div class="stat-desc">Rainfall</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">🌊</span>
+                                <div>
+                                    <div class="stat-value">Moderate</div>
+                                    <div class="stat-desc">Storm Surge</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Image Slideshow -->
+                        <div class="typhoon-slideshow" data-typhoon="glenda">
+                            <div class="slideshow-container">
+                                <div class="slide active">
+                                    <img src="Images/Typhoons/Glenda/Glenda1.jpg" alt="Typhoon Glenda Category 4">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <div class="slide">
+                                    <img src="Images/Typhoons/Glenda/Glenda2.jpg" alt="Strong winds">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <div class="slide">
+                                    <img src="Images/Typhoons/Glenda/Glenda3.jpg" alt="Damage">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <div class="slide">
+                                    <img src="Images/Typhoons/Glenda/Glenda4.jpg" alt="People affected">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <div class="slide">
+                                    <img src="Images/Typhoons/Glenda/Glenda5.jpg" alt="Agricultural damage">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <button class="slideshow-prev" onclick="changeSlide('glenda', -1)">❮</button>
+                                <button class="slideshow-next" onclick="changeSlide('glenda', 1)">❯</button>
+                            </div>
+                            <div class="slideshow-dots">
+                                <span class="dot active" onclick="currentSlide('glenda', 0)"></span>
+                                <span class="dot" onclick="currentSlide('glenda', 1)"></span>
+                                <span class="dot" onclick="currentSlide('glenda', 2)"></span>
+                                <span class="dot" onclick="currentSlide('glenda', 3)"></span>
+                                <span class="dot" onclick="currentSlide('glenda', 4)"></span>
+                            </div>
+                        </div>
+                        <div class="typhoon-impact">
+                            <h4>Impact on Batangas:</h4>
+                            <ul>
+                                <li>Widespread damage across the entire province</li>
+                                <li>Extensive damage to infrastructure, homes, and buildings</li>
+                                <li>Massive power outages lasting for days</li>
+                                <li>Severe damage to coconut and agricultural plantations</li>
+                                <li>Multiple casualties and injuries</li>
+                                <li>Long-term economic impact on the province</li>
+                            </ul>
+                        </div>
+                        <div class="typhoon-lesson">
+                            <strong>💡 Essential Learnings in Disaster Awareness:</strong> One of the most destructive typhoons in Batangas history, Glenda demonstrated the critical need for stronger building codes and comprehensive disaster preparedness programs.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="typhoon-card" data-year="2013">
+                    <div class="typhoon-header">
+                        <div class="typhoon-name">
+                            <span class="typhoon-icon">🌪️</span>
+                            <div>
+                                <h3>Typhoon Yolanda (Haiyan)</h3>
+                                <span class="typhoon-date">November 3-11, 2013</span>
+                            </div>
+                        </div>
+                        <div class="typhoon-category category-5">Category 5</div>
+                    </div>
+                    <div class="typhoon-details">
+                        <div class="typhoon-stats">
+                            <div class="stat-item">
+                                <span class="stat-icon">💨</span>
+                                <div>
+                                    <div class="stat-value">195 mph</div>
+                                    <div class="stat-desc">Peak Wind Speed</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">🌧️</span>
+                                <div>
+                                    <div class="stat-value">Extreme</div>
+                                    <div class="stat-desc">Rainfall</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">🌊</span>
+                                <div>
+                                    <div class="stat-value">Very High</div>
+                                    <div class="stat-desc">Storm Surge</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Image Slideshow -->
+                        <div class="typhoon-slideshow" data-typhoon="yolanda">
+                            <div class="slideshow-container">
+                                <div class="slide active">
+                                    <img src="Images/Typhoons/Yolanda/Yolanda.jpg" alt="Typhoon Yolanda Category 5">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <button class="slideshow-prev" onclick="changeSlide('yolanda', -1)">❮</button>
+                                <button class="slideshow-next" onclick="changeSlide('yolanda', 1)">❯</button>
+                            </div>
+                            <div class="slideshow-dots">
+                                <span class="dot active" onclick="currentSlide('yolanda', 0)"></span>
+                            </div>
+                        </div>
+                        <div class="typhoon-impact">
+                            <h4>Impact on Batangas:</h4>
+                            <ul>
+                                <li>While primarily affecting Eastern Visayas, Yolanda also impacted Batangas</li>
+                                <li>Heavy rainfall and strong winds caused damage</li>
+                                <li>Coastal areas experienced storm surges</li>
+                                <li>Contributed to national awareness of typhoon preparedness</li>
+                            </ul>
+                        </div>
+                        <div class="typhoon-lesson">
+                            <strong>💡 Essential Learnings in Disaster Awareness:</strong> This catastrophic typhoon led to nationwide improvements in disaster risk reduction and management systems, benefiting all provinces including Batangas.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="typhoon-card" data-year="2009">
+                    <div class="typhoon-header">
+                        <div class="typhoon-name">
+                            <span class="typhoon-icon">🌊</span>
+                            <div>
+                                <h3>Typhoon Ondoy (Ketsana)</h3>
+                                <span class="typhoon-date">September 24-27, 2009</span>
+                            </div>
+                        </div>
+                        <div class="typhoon-category category-2">Category 2</div>
+                    </div>
+                    <div class="typhoon-details">
+                        <div class="typhoon-stats">
+                            <div class="stat-item">
+                                <span class="stat-icon">💨</span>
+                                <div>
+                                    <div class="stat-value">85 mph</div>
+                                    <div class="stat-desc">Peak Wind Speed</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">🌧️</span>
+                                <div>
+                                    <div class="stat-value">Record</div>
+                                    <div class="stat-desc">Rainfall</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">🌊</span>
+                                <div>
+                                    <div class="stat-value">Moderate</div>
+                                    <div class="stat-desc">Storm Surge</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Image Slideshow -->
+                        <div class="typhoon-slideshow" data-typhoon="ondoy">
+                            <div class="slideshow-container">
+                                <div class="slide active">
+                                    <img src="Images/Typhoons/Ondoy/Ondoy1.jpg" alt="Typhoon Ondoy">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <div class="slide">
+                                    <img src="Images/Typhoons/Ondoy/Ondoy2.jpg" alt="Heavy rain">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <div class="slide">
+                                    <img src="Images/Typhoons/Ondoy/Ondoy3.jpg" alt="Severe flooding">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <div class="slide">
+                                    <img src="Images/Typhoons/Ondoy/Ondoy4.jpg" alt="Rescue operations">
+                                    <div class="slide-caption"></div>
+                                </div>
+                                <button class="slideshow-prev" onclick="changeSlide('ondoy', -1)">❮</button>
+                                <button class="slideshow-next" onclick="changeSlide('ondoy', 1)">❯</button>
+                            </div>
+                            <div class="slideshow-dots">
+                                <span class="dot active" onclick="currentSlide('ondoy', 0)"></span>
+                                <span class="dot" onclick="currentSlide('ondoy', 1)"></span>
+                                <span class="dot" onclick="currentSlide('ondoy', 2)"></span>
+                                <span class="dot" onclick="currentSlide('ondoy', 3)"></span>
+                            </div>
+                        </div>
+                        <div class="typhoon-impact">
+                            <h4>Impact on Batangas:</h4>
+                            <ul>
+                                <li>Record-breaking rainfall causing severe flooding</li>
+                                <li>Widespread flooding in low-lying areas</li>
+                                <li>Significant damage to infrastructure</li>
+                                <li>Highlighted the importance of flood management systems</li>
+                            </ul>
+                        </div>
+                        <div class="typhoon-lesson">
+                            <strong>💡 Essential Learnings in Disaster Awareness:</strong> Demonstrated that even lower-category typhoons can cause catastrophic flooding, emphasizing the need for comprehensive flood control measures.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vulnerable Areas Summary -->
+            <div class="vulnerable-areas-summary">
+                <h3 class="subsection-title">⚠️ Most Vulnerable Areas in Batangas</h3>
+                <div class="vulnerable-grid">
+                    <div class="vulnerable-card">
+                        <div class="vulnerable-icon">🏖️</div>
+                        <h4>Coastal Areas</h4>
+                        <p>Batangas City, Calatagan, Lian, Nasugbu, and other coastal municipalities are highly vulnerable to storm surges and strong winds.</p>
+                    </div>
+                    <div class="vulnerable-card">
+                        <div class="vulnerable-icon">🌊</div>
+                        <h4>Low-lying Areas</h4>
+                        <p>Areas near Taal Lake, rivers, and floodplains are at risk of severe flooding during heavy rainfall.</p>
+                    </div>
+                    <div class="vulnerable-card">
+                        <div class="vulnerable-icon">⛰️</div>
+                        <h4>Mountainous Regions</h4>
+                        <p>Areas along Tagaytay Ridge and other elevated regions are prone to landslides during heavy rains.</p>
+                    </div>
+                    <div class="vulnerable-card">
+                        <div class="vulnerable-icon">🏙️</div>
+                        <h4>Urban Centers</h4>
+                        <p>Lipa, Tanauan, and other urban areas face flooding risks due to inadequate drainage systems.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" class="back-to-top-btn" onclick="scrollToTop()" title="Back to Dashboard">
+        <span>↑</span>
+    </button>
+
+    <!-- Preparedness Section -->
+    <section id="preparedness" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Preparedness Checklist</h2>
+            <p class="section-description">Use this interactive checklist to ensure you're ready for typhoon season</p>
+            
+            <div class="preparedness-content">
+                <div class="checklist-container">
+                    <h3>Emergency Preparedness Checklist</h3>
+                    <div class="checklist-controls">
+                        <button class="btn btn-secondary btn-small" onclick="checkAllItems()">Check All</button>
+                        <button class="btn btn-secondary btn-small" onclick="uncheckAllItems()">Uncheck All</button>
+                    </div>
+                    <div id="checklist" class="checklist">
+                        <!-- Checklist items will be generated by JavaScript -->
+                    </div>
+                    <div class="checklist-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <span class="progress-text" id="progressText">0% Complete</span>
+                    </div>
+                    <div id="completionMessage" class="completion-message" style="display: none;">
+                        <img src="Images/Emergency Checklist.png" alt="Checklist Complete" class="completion-icon">
+                        <span class="completion-text">Checklist Complete! You're prepared!</span>
+                    </div>
+                </div>
+
+                <div class="emergency-kit">
+                    <h3>Emergency Kit Builder</h3>
+                    <div class="kit-items" id="kitItems">
+                        <!-- Kit items will be generated by JavaScript -->
+                    </div>
+                    <div class="kit-buttons">
+                        <button class="btn btn-primary" onclick="generateKitList()">
+                            <span>🖨️</span> Print Kit List
+                        </button>
+                        <button class="btn btn-primary" onclick="generateEmergencyGuide()">
+                            <span>📥</span> Download Emergency Guide
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Assessment Tool -->
+            <div class="risk-assessment">
+                <h3 class="subsection-title">Typhoon Risk Assessment</h3>
+                <div class="risk-form">
+                    <div class="form-group">
+                        <label>Your Location in Batangas:</label>
+                        <select id="locationType" onchange="calculateRisk()">
+                            <option value="">Select...</option>
+                            <option value="coastal">Coastal Area (Batangas City, Calatagan, etc.)</option>
+                            <option value="lowland">Low-lying Area (near rivers/lakes)</option>
+                            <option value="mountain">Mountainous Area (Tagaytay Ridge, etc.)</option>
+                            <option value="urban">Urban Area (Lipa, Tanauan, etc.)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Building Type:</label>
+                        <select id="buildingType" onchange="calculateRisk()">
+                            <option value="">Select...</option>
+                            <option value="concrete">Concrete/Reinforced</option>
+                            <option value="wood">Wooden Structure</option>
+                            <option value="apartment">High-rise Apartment</option>
+                            <option value="temporary">Temporary Structure</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Evacuation Route Available:</label>
+                        <select id="evacuationRoute" onchange="calculateRisk()">
+                            <option value="">Select...</option>
+                            <option value="yes">Yes, Clear Route</option>
+                            <option value="limited">Limited Options</option>
+                            <option value="no">No Clear Route</option>
+                        </select>
+                    </div>
+                    <div class="risk-result" id="riskResult"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Simulator Section -->
+    <section id="simulator" class="section">
+        <div class="container">
+            <h2 class="section-title">Typhoon Impact Simulator</h2>
+            <p class="section-description">Adjust parameters to see how different typhoon intensities affect various scenarios</p>
+            
+            <div class="simulator-container">
+                <div class="simulator-controls">
+                    <div class="control-group">
+                        <label>Wind Speed (mph):</label>
+                        <input type="range" id="windSpeed" min="39" max="195" value="74" oninput="updateSimulator()">
+                        <span id="windSpeedValue">74 mph</span>
+                    </div>
+                    <div class="control-group">
+                        <label>Rainfall (inches/day):</label>
+                        <input type="range" id="rainfall" min="1" max="20" value="5" oninput="updateSimulator()">
+                        <span id="rainfallValue">5 inches</span>
+                    </div>
+                    <div class="control-group">
+                        <label>Storm Surge (feet):</label>
+                        <input type="range" id="stormSurge" min="0" max="30" value="5" oninput="updateSimulator()">
+                        <span id="stormSurgeValue">5 feet</span>
+                    </div>
+                </div>
+
+                <div class="simulator-visualization">
+                    <div class="typhoon-visual" id="typhoonVisual">
+                        <div class="typhoon-eye"></div>
+                        <div class="typhoon-bands"></div>
+                    </div>
+                    <div class="impact-display" id="impactDisplay">
+                        <div class="impact-item">
+                            <span class="impact-label">Category:</span>
+                            <span class="impact-value" id="categoryValue">Category 1</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-label">Damage Level:</span>
+                            <span class="impact-value" id="damageValue">Minimal</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-label">Flood Risk:</span>
+                            <span class="impact-value" id="floodRisk">Low</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-label">Evacuation:</span>
+                            <span class="impact-value" id="evacuationStatus">Recommended</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evacuation Route Planner -->
+            <div class="evacuation-planner">
+                <h3 class="subsection-title">Evacuation Route Planner</h3>
+                <div class="planner-container">
+                    <div class="route-input">
+                        <div class="input-group">
+                            <label>Starting Point (Batangas):</label>
+                            <input type="text" id="startPoint" placeholder="Enter your barangay/municipality">
+                        </div>
+                        <div class="input-group">
+                            <label>Destination (Evacuation Center):</label>
+                            <input type="text" id="destination" placeholder="Enter nearest evacuation center">
+                            <small style="color: var(--text-secondary); margin-top: 0.25rem; display: block;">Contact your barangay captain for official evacuation center locations</small>
+                        </div>
+                        <button class="btn btn-primary" onclick="planRoute()">Plan Route</button>
+                    </div>
+                    <div class="route-display" id="routeDisplay">
+                        <div class="route-info">
+                            <h4>Route Information</h4>
+                            <div id="routeDetails">
+                                <p>Enter your starting point and destination to plan your evacuation route.</p>
+                            </div>
+                        </div>
+                        <div class="route-checklist">
+                            <h4>Route Safety Checklist</h4>
+                            <ul id="routeChecklist">
+                                <li>✓ Identify multiple evacuation routes</li>
+                                <li>✓ Check route elevation (avoid flood-prone areas)</li>
+                                <li>✓ Note emergency shelters along the route</li>
+                                <li>✓ Have backup routes planned</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Tips Section -->
+    <section id="resources" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Safety Tips & Resources</h2>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-number">01</div>
+                    <h3>Before the Typhoon</h3>
+                    <ul>
+                        <li>Secure outdoor furniture and objects</li>
+                        <li>Stock up on food, water, and supplies</li>
+                        <li>Charge all electronic devices</li>
+                        <li>Review evacuation routes</li>
+                        <li>Stay informed via weather updates</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-number">02</div>
+                    <h3>During the Typhoon</h3>
+                    <ul>
+                        <li>Stay indoors and away from windows</li>
+                        <li>Avoid using electrical appliances</li>
+                        <li>Keep emergency kit accessible</li>
+                        <li>Monitor weather updates</li>
+                        <li>Do not go outside until authorities say it's safe</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-number">03</div>
+                    <h3>After the Typhoon</h3>
+                    <ul>
+                        <li>Wait for official clearance before going outside</li>
+                        <li>Check for structural damage</li>
+                        <li>Avoid floodwaters and downed power lines</li>
+                        <li>Use flashlights instead of candles</li>
+                        <li>Contact family to confirm safety</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Interactive Quiz -->
+            <div class="quiz-container">
+                <h3 class="subsection-title">Test Your Knowledge</h3>
+                <div class="quiz" id="quiz">
+                    <div class="quiz-question" id="quizQuestion"></div>
+                    <div class="quiz-options" id="quizOptions"></div>
+                    <div class="quiz-feedback" id="quizFeedback"></div>
+                    <div class="quiz-score">
+                        <span>Score: <span id="quizScore">0</span>/<span id="quizTotal">0</span></span>
+                    </div>
+                    <button class="btn btn-primary" id="nextQuestionBtn" onclick="nextQuestion()" style="display: none;">Next Question</button>
+                </div>
+            </div>
+
+            <!-- Emergency Contacts -->
+            <div class="emergency-contacts">
+                <h3 class="subsection-title">Emergency Contacts for Batangas</h3>
+                <div class="contacts-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">📞</div>
+                        <h4>National Emergency</h4>
+                        <p>911 / 117</p>
+                        <small>Philippine Emergency Hotline</small>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">🌦️</div>
+                        <h4>PAGASA</h4>
+                        <p>(02) 8284-0800</p>
+                        <small>Weather Information</small>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">🏛️</div>
+                        <h4>Batangas DRRM</h4>
+                        <p>(043) 723-3616</p>
+                        <small>Disaster Risk Reduction Management</small>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">🚨</div>
+                        <h4>PNP Batangas</h4>
+                        <p>(043) 723-3611</p>
+                        <small>Philippine National Police</small>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">🚑</div>
+                        <h4>BFP Batangas</h4>
+                        <p>(043) 723-3615</p>
+                        <small>Bureau of Fire Protection</small>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">🏥</div>
+                        <h4>Medical Emergency</h4>
+                        <p>911 / 117</p>
+                        <small>Emergency Medical Services</small>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">📻</div>
+                        <h4>Red Cross Batangas</h4>
+                        <p>(043) 723-3617</p>
+                        <small>Philippine Red Cross</small>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">📱</div>
+                        <h4>NDRRMC</h4>
+                        <p>(02) 8911-1406</p>
+                        <small>National Disaster Risk Reduction</small>
+                    </div>
+                </div>
+                <div class="contacts-note">
+                    <strong>Important:</strong> For immediate emergencies, dial 911 or 117. Contact your barangay captain for local evacuation centers and community-specific emergency procedures.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>StormScope Batangas</h4>
+                    <p>Empowering Batangas communities through typhoon awareness and preparedness. Supporting Batangas DRRM in providing localized storm information.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Typhoons</a></li>
+                <li><a href="#updates">Weather Updates</a></li>
+                <li><a href="#past-typhoons">Past Typhoons</a></li>
+                <li><a href="#preparedness">Preparedness</a></li>
+                <li><a href="#simulator">Simulator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Official Resources</h4>
+                    <p>Always check official sources: <a href="https://www.pagasa.dost.gov.ph" target="_blank">PAGASA</a>, Batangas DRRM, and your local barangay for real-time updates and official instructions.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 StormScope Batangas. Educational purposes only. Always follow official emergency instructions from PAGASA, Batangas DRRM, and local authorities.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
